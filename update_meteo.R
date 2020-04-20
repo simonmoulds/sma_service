@@ -24,6 +24,6 @@ while (flag) {
             col.names=FALSE
         )
         i = i+1
-        Sys.sleep(5)
+        Sys.sleep(1)
     }
 }
