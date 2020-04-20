@@ -7,7 +7,7 @@ while (flag) {
     nt = nrow(meteo)
     write.table(
         meteo[1:30,,drop=FALSE],
-        "simulated_realtime_met_data.csv",
+        "/tmp/simulated_realtime_met_data.csv",
         sep=",",
         row.names=FALSE,
         col.names=TRUE
@@ -17,7 +17,7 @@ while (flag) {
     while (i <= nt) {
         write.table(
             meteo[i,,drop=FALSE],
-            "simulated_realtime_met_data.csv",
+            "/tmp/simulated_realtime_met_data.csv",
             append=TRUE,
             sep=",",
             row.names=FALSE,
