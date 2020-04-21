@@ -124,7 +124,7 @@ server <- function(input, output)
     
     run_model <- reactive({
         
-        invalidateLater(1000)
+        invalidateLater(5000)
 
         ## import meteorological data - the idea here is that
         ## the meteorological files are regularly updated.
