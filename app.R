@@ -121,16 +121,34 @@ server <- function(input, output)
     ## increasing gamma); GCWM uses a value of 2
     ## for rainfed, 3 for irrigated cropland
     gamma = 2
+
+    vals = reactiveValues(counter = 0)
+
+    ## import meteorological data - the idea here is that
+    ## the meteorological files are regularly updated.
+    princeton_data = read.csv("princeton_data.csv")
+    princeton_data$prcp = princeton_data$prcp * 24 * 60 * 60  # kg/m2/s -> mm/day
+    ndata = nrow(princeton_data)
     
     run_model <- reactive({
         
-        invalidateLater(5000)
+        invalidateLater(1000)
+        
+        vals$counter = isolate(vals$counter) + 1
+        if ((vals$counter + 30) > ndata) {
+            vals$counter = 0
+        }
+        
+        ## ## import meteorological data - the idea here is that
+        ## ## the meteorological files are regularly updated.
+        ## meteo = read.csv("simulated_realtime_met_data.csv")
+        ## time = as.POSIXct(meteo$time)        
+        ## meteo$prcp = meteo$prcp * 24 * 60 * 60  # kg/m2/s -> mm/day
 
-        ## import meteorological data - the idea here is that
-        ## the meteorological files are regularly updated.
-        meteo = read.csv("/tmp/simulated_realtime_met_data.csv")
-        time = as.POSIXct(meteo$time)        
-        meteo$prcp = meteo$prcp * 24 * 60 * 60  # kg/m2/s -> mm/day
+        start_ix = vals$counter + 1
+        end_ix = vals$counter + 30
+        meteo = princeton_data[start_ix:end_ix,]
+        time = as.POSIXct(meteo$time)
         
         ## crop-specific parameters (kc, root depth,
         ## depletion factor)
