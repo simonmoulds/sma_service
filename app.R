@@ -132,7 +132,7 @@ server <- function(input, output)
     
     run_model <- reactive({
         
-        invalidateLater(1000)
+        invalidateLater(10000)
         
         vals$counter = isolate(vals$counter) + 1
         if ((vals$counter + 30) > ndata) {
