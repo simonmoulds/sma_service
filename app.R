@@ -128,7 +128,7 @@ server <- function(input, output)
 
         ## import meteorological data - the idea here is that
         ## the meteorological files are regularly updated.
-        meteo = read.csv("simulated_realtime_met_data.csv")
+        meteo = read.csv("/tmp/simulated_realtime_met_data.csv")
         time = as.POSIXct(meteo$time)        
         meteo$prcp = meteo$prcp * 24 * 60 * 60  # kg/m2/s -> mm/day
         
