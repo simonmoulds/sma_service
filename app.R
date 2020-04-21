@@ -16,9 +16,9 @@ source("water_balance_model.R")
 ## Retaining date window: https://stackoverflow.com/a/44244994
 ## Visualization: https://www.showmeshiny.com/wp-content/uploads/2018/03/Time-Series-Dashboard.png
 
-## Run a script which simulates a realtime service
-## TODO: make this platform independent
-system(command='Rscript update_meteo.R', wait=FALSE)
+## ## Run a script which simulates a realtime service
+## ## TODO: make this platform independent
+## system(command='Rscript update_meteo.R', wait=FALSE)
 
 header <- dashboardHeader(
     title = 'Crop water stress'
